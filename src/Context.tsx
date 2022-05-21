@@ -1,10 +1,16 @@
-import { ReactElement } from 'react';
+import { ThemeContext } from './App';
+import { ReactElement, useContext } from 'react';
 
 type Theme = 'light' | 'dark';
 
-export function ThemeProvider(props: {
-    theme: Theme;
-    children: ReactElement;
-}) {}
+export function ThemeProvider(props: { theme: Theme; children: ReactElement }) {
+    return (
+        <ThemeContext.Provider value={props.theme}>
+            {props.children}
+        </ThemeContext.Provider>
+    );
+}
 
-export function useTheme(): Theme {}
+export function useTheme(): Theme {
+    return useContext(ThemeContext) as Theme;
+}
